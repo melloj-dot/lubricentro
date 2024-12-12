@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'El Peca',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -299,99 +299,91 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
         [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
-
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Clientes',
+            'icon' => 'fas fa-fw fa-address-book',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Alta cliente',
+                    'route' => 'cliente.create',
+                    'icon' => 'fas fa-address-card'
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Ver clientes',
+                    'route' => 'cliente.index',
+                    'icon' => 'fas fa-eye'
                 ],
             ],
         ],
-        ['header' => 'labels'],
         [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
+            'text' => 'Vehículos',
+            'icon' => 'fas fa-car-side',
+            'submenu' => [
+                [
+                    'text' => 'Registrar vehículo',
+                    'route' => '',
+                    'icon' => 'fas fa-plus'
+                ],
+                [
+                    'text' => 'Ver vehículos',
+                    'route' => '',
+                    'icon' => 'fas fa-eye'
+                ]
+            ],
         ],
         [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
+            'text' => 'Intervenciones',
+            'icon' => 'fas fa-hammer',
+            'submenu' => [
+                [
+                    'text' => 'Registrar intervención',
+                    'route' => '',
+                    'icon' => 'fas fa-plus'
+                ],
+                [
+                    'text' => 'Ver intervenciones',
+                    'route' => '',
+                    'icon' => 'fas fa-eye'
+                ]
+            ],
         ],
         [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
+            'text' => 'Productos',
+            'icon' => 'fas fa-laptop-medical',
+            'submenu' => [
+                [
+                    'text' => 'Registrar producto',
+                    'route' => 'producto.create',
+                    'icon' => 'fas fa-plus'
+                ],
+                [
+                    'text' => 'Ver productos',
+                    'route' => 'producto.index',
+                    'icon' => 'fas fa-list'
+                ]
+            ],
         ],
+        [
+            'text' => 'Ventas',
+            'icon' => 'fas fa-fw fa-rocket',
+            'submenu' => [
+                [
+                    'text' => 'Registrar venta',
+                    'route' => 'venta.create',
+                    'icon' => 'fas fa-money-bill-wave'
+                ],
+                [
+                    'text' => 'Ver ventas',
+                    'route' => 'venta.index',
+                    'icon' => 'fas fa-chart-pie'
+                ]
+            ],
+        ],
+        [
+            'text' => 'Stock',
+            'route' => 'stock.index',
+            'icon' => 'fas fa-fw fa-cubes',
+        ]
     ],
 
     /*
