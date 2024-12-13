@@ -1,8 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\StockController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InterventionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,8 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/producto', ProductController::class,['except' => ['show']]);
     Route::resource('/venta', SaleController::class,['except' => ['show']]);
     Route::resource('/stock', StockController::class,['except' => ['show']]);
-
-
 
 });
 

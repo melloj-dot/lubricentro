@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => 'El <b>PECA</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -321,12 +321,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Registrar vehículo',
-                    'route' => '',
+                    'route' => 'vehiculo.create',
                     'icon' => 'fas fa-plus'
                 ],
                 [
                     'text' => 'Ver vehículos',
-                    'route' => '',
+                    'route' => 'vehiculo.index',
                     'icon' => 'fas fa-eye'
                 ]
             ],
