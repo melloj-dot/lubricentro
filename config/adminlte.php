@@ -337,12 +337,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Registrar intervención',
-                    'route' => '',
+                    'route' => 'intervencion.create',
                     'icon' => 'fas fa-plus'
                 ],
                 [
                     'text' => 'Ver intervenciones',
-                    'route' => '',
+                    'route' => 'intervencion.index',
                     'icon' => 'fas fa-eye'
                 ]
             ],
