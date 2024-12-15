@@ -22,7 +22,6 @@
         <table id="interventions_table" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Fecha</th>
                     <th>Dominio</th>
                     <th>KM</th>
@@ -38,6 +37,7 @@
                     <th>A.Diferencial</th>
                     <th>L.Freno</th>
                     <th>F.Hidraulico</th>
+                    <th>R.Radiador</th>
                     <th>Obs</th>
                     <th>Acciones</th>
                 </tr>
@@ -45,22 +45,72 @@
             <tbody>
                 @foreach ($interventions as $intervention)
                 <tr>
-                    <td>{{$intervention->id}}</td>
                     <td>{{$intervention->created_at->format('d-m-Y')}}</td>
                     <td>{{$intervention->dominio}}</td>
                     <td>{{$intervention->km}}</td>
                     <td>{{$intervention->pkm}}</td>
-                    <td>{{$intervention->aceite}}</td>
-                    <td>{{$intervention->filtroaceite}}</td>
-                    <td>{{$intervention->filtrocomb}}</td>
-                    <td>{{$intervention->filtroaire}}</td>
-                    <td>{{$intervention->aceitecaja}}</td>
-                    <td>{{$intervention->balanceo}}</td>
-                    <td>{{$intervention->rot}}</td>
-                    <td>{{$intervention->filtrohabitaculo}}</td>
-                    <td>{{$intervention->aceitediferencial}}</td>
-                    <td>{{$intervention->liqfreno}}</td>
-                    <td>{{$intervention->fluidohidraulico}}</td>
+                    @if ($intervention->aceite == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->aceite }}</td>
+                    @endif
+                    @if ($intervention->filtroaceite == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->filtroaceite }}</td>
+                    @endif
+                    @if ($intervention->filtrocomb == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->filtrocomb }}</td>
+                    @endif
+                    @if ($intervention->filtroaire == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->filtroaire }}</td>
+                    @endif
+                    @if ($intervention->aceitecaja == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->aceitecaja }}</td>
+                    @endif
+                    @if ($intervention->balanceo == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->balanceo }}</td>
+                    @endif
+                    @if ($intervention->rot == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->rot }}</td>
+                    @endif
+                    @if ($intervention->filtrohabitaculo == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->filtrohabitaculo }}</td>
+                    @endif
+                    @if ($intervention->aceitediferencial == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->aceitediferencial }}</td>
+                    @endif
+                    @if ($intervention->liqfreno == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->liqfreno }}</td>
+
+                    @endif
+                    @if ($intervention->fluidohidraulico == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->fluidohidraulico }}</td>
+                    @endif
+
+                    @if ($intervention->refrigradiador == null)
+                        <td>NO</td>
+                    @else
+                        <td>{{ $intervention->refrigradiador }}</td>
+                    @endif
                     <td>{{$intervention->observaciones}}</td>
 
                     <td>
@@ -70,9 +120,13 @@
                             @csrf
                             @method('DELETE')
                         </form>
+                        -
+                        <form action="{{ route('intervencion.dumppdf',  $intervention->dominio) }}" method="GET" target="_blank">
+                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-file-pdf"></button></i></a>
+                            @csrf
+                        </form>
                         </div>
                     </td>
-
                 </tr>
                 @endforeach
             </tbody>

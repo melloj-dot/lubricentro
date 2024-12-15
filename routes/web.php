@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/venta', SaleController::class,['except' => ['show']]);
     Route::resource('/stock', StockController::class,['except' => ['show']]);
 
+    Route::get('/intervencion-pdf/{patent}',[InterventionController::class, 'dumppdf'])->name('intervencion.dumppdf');
+
 });
 
 require __DIR__.'/auth.php';

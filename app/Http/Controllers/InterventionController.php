@@ -6,6 +6,9 @@ use App\Models\Vehicle;
 use App\Models\Intervention;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Dompdf\Dompdf;
+
+use PDF;
 
 class InterventionController extends Controller
 {
@@ -96,13 +99,26 @@ class InterventionController extends Controller
         return redirect()->route('intervencion.index')->with('success', 'Intervención añadida correctamente.');
     }
 
+    public function dumppdf(string $patente){
+
+        $interventions = Intervention::where('dominio', $patente)->get();
+
+        $vehicleData = Vehicle::where('Dominio', $patente)->get();
+
+        $pdf = PDF::loadView('intervention.pdf', compact('interventions','vehicleData'));
+
+        return $pdf->stream('Historial-'.$patente.'.pdf');
+
+
+    }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        dd('show method');
     }
 
     /**
