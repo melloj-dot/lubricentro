@@ -2,63 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+
+        $sales = Sale::with('product')->get();
+        $products = Product::all();
+
+        return view('sale.index', compact('sales', 'products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $products = Product::all();
+        return view('sale.create', compact('products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $product = Product::find($validated['product_id']);
+        $totalPrice = $product->price * $validated['quantity'];
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        if ($product->stock_quantity < $validated['quantity']) {
+            return back()->withErrors('No hay suficiente stock disponible.');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $sale = Sale::create([
+            'product_id' => $validated['product_id'],
+            'quantity' => $validated['quantity'],
+            'total_price' => $totalPrice,
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $product->decrement('stock_quantity', $validated['quantity']);
+
+        return redirect()->route('venta.index')->with('success', 'Venta registrada exitosamente.');
     }
 }

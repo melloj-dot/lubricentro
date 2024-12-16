@@ -91,7 +91,7 @@
 </div>
 
 @php
-    $path = 'img/logo.png';
+    $path = 'img/imagen.jpeg';
     $type = pathinfo($path, PATHINFO_EXTENSION);
     $data = file_get_contents($path);
     $b64l = 'data:img/' . $type . ';base64,' . base64_encode($data);

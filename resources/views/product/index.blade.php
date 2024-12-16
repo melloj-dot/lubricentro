@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Ver clientes')
+@section('title', 'Ver productos')
 
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.bootstrap4.css">
@@ -12,61 +12,58 @@
 @endsection
 
 @section('content_header')
-    <h1>Listado de vehículos</h1>
+    <h1>Listado de productos</h1>
 @stop
 
+
 @section('content')
-<div class="card">
-    <div class="card-body">
-        <table id="vehiclestable" class="table table-striped table-bordered" style="width:100%">
-            <thead>
+
+<!-- Mensajes de éxito -->
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+<!-- Botón para crear un nuevo producto -->
+<a href="{{ route('producto.create') }}" class="btn btn-primary mb-3">Nuevo Producto</a>
+
+<!-- Tabla de productos -->
+@if($products->count() > 0)
+    <table id="products_table" class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($products as $product)
                 <tr>
-                    <th>ID</th>
-                    <th>Modelo</th>
-                    <th>Dominio</th>
-                    <th>Aceite</th>
-                    <th>A.Diferencial</th>
-                    <th>N.Cubiertas</th>
-                    <th>N.Propietario</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($vehicles as $vehicle)
-                <tr>
-                    <td>{{$vehicle->ID}}</td>
-                    <td>{{$vehicle->Modelo}}</td>
-                    <td>{{$vehicle->Dominio}}</td>
-                    <td>{{$vehicle->Aceite}}</td>
-                    <td>{{$vehicle->ADiferencial}}</td>
-                    <td>{{$vehicle->NCubiertas}}</td>
-                    <td>{{$vehicle->NPropietario}}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->description ?: 'Sin descripción' }}</td>
+                    <td>${{ number_format($product->price, 2) }}</td>
+                    <td>{{ $product->stock_quantity }}</td>
                     <td>
-                        <div class="d-flex align-items-center">
-                        <form action="{{ route('vehiculo.destroy',  $vehicle->ID) }}" method="POST">
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-trash-alt"></button></i></a>
+                        <a href="{{ route('producto.edit', $product->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                        <form action="{{ route('producto.destroy', $product->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
                         </form>
-                        -
-                        <form action="{{ route('vehiculo.edit',  $vehicle->ID) }}">
-                            @csrf
-                            @method('PUT')
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-user-edit"></button></i></a>
-                        </form>
-                        -
-                        <form action="{{ route('intervencion.dumppdf',  $vehicle->Dominio) }}" method="GET" target="_blank">
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-file-pdf"></button></i></a>
-                            @csrf
-                        </form>
-                        </div>
                     </td>
                 </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
+            @endforeach
+        </tbody>
+    </table>
+@else
+    <p class="text-center">No hay productos registrados. <a href="{{ route('producto.create') }}">Agrega un nuevo producto</a>.</p>
+@endif
 @endsection
 
 
@@ -95,7 +92,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script>
-    new DataTable('#vehiclestable', {
+    new DataTable('#products_table', {
         responsive: true,
                 "language":{
                     "search": "Buscar",

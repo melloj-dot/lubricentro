@@ -120,11 +120,6 @@
                             @csrf
                             @method('DELETE')
                         </form>
-                        -
-                        <form action="{{ route('intervencion.dumppdf',  $intervention->dominio) }}" method="GET" target="_blank">
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-file-pdf"></button></i></a>
-                            @csrf
-                        </form>
                         </div>
                     </td>
                 </tr>

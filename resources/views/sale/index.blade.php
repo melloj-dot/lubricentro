@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Ver clientes')
+@section('title', 'Ver ventas')
 
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.bootstrap4.css">
@@ -12,61 +12,50 @@
 @endsection
 
 @section('content_header')
-    <h1>Listado de vehículos</h1>
+    <h1>Listado de ventas</h1>
 @stop
 
+
 @section('content')
-<div class="card">
-    <div class="card-body">
-        <table id="vehiclestable" class="table table-striped table-bordered" style="width:100%">
-            <thead>
+
+    <!-- Mensajes de éxito -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Botón para crear una nueva venta -->
+    <a href="{{ route('venta.create') }}" class="btn btn-primary mb-3">Nueva Venta</a>
+
+    <!-- Tabla de ventas -->
+    @if($sales->count() > 0)
+        <table id="sales_table" class="table table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Modelo</th>
-                    <th>Dominio</th>
-                    <th>Aceite</th>
-                    <th>A.Diferencial</th>
-                    <th>N.Cubiertas</th>
-                    <th>N.Propietario</th>
-                    <th>Acciones</th>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Total</th>
+                    <th>Fecha</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($vehicles as $vehicle)
-                <tr>
-                    <td>{{$vehicle->ID}}</td>
-                    <td>{{$vehicle->Modelo}}</td>
-                    <td>{{$vehicle->Dominio}}</td>
-                    <td>{{$vehicle->Aceite}}</td>
-                    <td>{{$vehicle->ADiferencial}}</td>
-                    <td>{{$vehicle->NCubiertas}}</td>
-                    <td>{{$vehicle->NPropietario}}</td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                        <form action="{{ route('vehiculo.destroy',  $vehicle->ID) }}" method="POST">
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-trash-alt"></button></i></a>
-                            @csrf
-                            @method('DELETE')
-                        </form>
-                        -
-                        <form action="{{ route('vehiculo.edit',  $vehicle->ID) }}">
-                            @csrf
-                            @method('PUT')
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-user-edit"></button></i></a>
-                        </form>
-                        -
-                        <form action="{{ route('intervencion.dumppdf',  $vehicle->Dominio) }}" method="GET" target="_blank">
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-file-pdf"></button></i></a>
-                            @csrf
-                        </form>
-                        </div>
-                    </td>
-                </tr>
+                @foreach($sales as $sale)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $sale->product->name ?? 'Producto eliminado' }}</td>
+                        <td>{{ $sale->quantity }}</td>
+                        <td>${{ number_format($sale->total_price, 2) }}</td>
+                        <td>{{ $sale->created_at->format('d/m/Y') }}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
-    </div>
-</div>
+    @else
+        <p class="text-center">No hay ventas registradas. <a href="{{ route('venta.create') }}">Registra una nueva venta</a>.</p>
+    @endif
+
 @endsection
 
 
@@ -95,7 +84,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script>
-    new DataTable('#vehiclestable', {
+    new DataTable('#sales_table', {
         responsive: true,
                 "language":{
                     "search": "Buscar",
