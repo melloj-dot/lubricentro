@@ -68,7 +68,8 @@ class CustomerController extends Controller
         $cliente->save();
 
         // Redireccionar con un mensaje de éxito
-        return to_route('cliente.index');
+        return redirect()->route('cliente.index')->with('success', 'Cliente creado exitosamente.');
+
     }
 
     /**
@@ -111,6 +112,7 @@ class CustomerController extends Controller
     {
         Customer::where('id', $id)->delete();
 
-        return to_route('cliente.index');
+        return redirect()->route('cliente.index')->with('success', 'Cliente eliminado exitosamente.');
+
     }
 }

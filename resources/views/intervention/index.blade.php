@@ -17,6 +17,11 @@
 
 
 @section('content')
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="card">
     <div class="card-body">
         <table id="interventions_table" class="table table-striped table-bordered" style="width:100%">
@@ -168,7 +173,6 @@
                     }
 
                 },
-                order: [[0, 'desc']],
                 dom: 'Bfrtip', // Habilita los botones
             buttons: [
                 'copy',

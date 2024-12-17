@@ -31,7 +31,7 @@ class InterventionController extends Controller
      */
     public function index()
     {
-        $interventions = Intervention::all();
+        $interventions = Intervention::orderBy('id','DESC');
 
         return view('intervention.index', compact('interventions'));
     }

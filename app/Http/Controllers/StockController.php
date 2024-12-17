@@ -45,4 +45,11 @@ class StockController extends Controller
 
         return redirect()->route('stock.index')->with('success', 'Movimiento de stock registrado.');
     }
+
+    public function destroy(string $id){
+
+        Stock::where('id', $id)->delete();
+
+        return to_route('stock.index');
+    }
 }
