@@ -118,7 +118,7 @@
                             bold: true,
                             fontSize: 12,
                             color: 'white',
-                            fillColor: '#f7d71c', // Color del encabezado
+                            fillColor: '#FF0000', // Color del encabezado
                         };
                     }
                 }

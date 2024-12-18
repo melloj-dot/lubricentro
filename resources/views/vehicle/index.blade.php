@@ -23,8 +23,8 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <table id="vehiclestable" class="table table-striped table-bordered" style="width:100%">
-            <thead>
+        <table id="vehiclestable" class="table table-bordered table-hover" style="width:100%">
+            <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Modelo</th>
@@ -48,21 +48,22 @@
                     <td>{{$vehicle->NPropietario}}</td>
                     <td>
                         <div class="d-flex align-items-center">
-                        <form action="{{ route('vehiculo.destroy',  $vehicle->ID) }}" method="POST">
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-trash-alt"></button></i></a>
-                            @csrf
-                            @method('DELETE')
-                        </form>
-                        -
+
                         <form action="{{ route('vehiculo.edit',  $vehicle->ID) }}">
                             @csrf
                             @method('PUT')
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-user-edit"></button></i></a>
+                            <a href=""><button class="btn btn-warning me-2"><i class="fas fa-marker"></button></i></a>
                         </form>
                         -
                         <form action="{{ route('intervencion.dumppdf',  $vehicle->Dominio) }}" method="GET" target="_blank">
                             <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-file-pdf"></button></i></a>
                             @csrf
+                        </form>
+                        -
+                        <form action="{{ route('vehiculo.destroy',  $vehicle->ID) }}" method="POST">
+                            <a href=""><button class="btn btn-danger me-2"><i class="fas fa-trash-alt"></button></i></a>
+                            @csrf
+                            @method('DELETE')
                         </form>
                         </div>
                     </td>
@@ -134,7 +135,7 @@
                             bold: true,
                             fontSize: 12,
                             color: 'white',
-                            fillColor: '#f7d71c', // Color del encabezado
+                            fillColor: '#FF0000', // Color del encabezado
                         };
                     }
                 }

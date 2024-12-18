@@ -31,7 +31,7 @@ class InterventionController extends Controller
      */
     public function index()
     {
-        $interventions = Intervention::orderBy('id','DESC');
+        $interventions = Intervention::orderBy('id','desc')->get();
 
         return view('intervention.index', compact('interventions'));
     }
@@ -41,8 +41,7 @@ class InterventionController extends Controller
      */
     public function create()
     {
-        $vehiculos = Vehicle::orderBy('id','desc')->get();
-
+        $vehiculos = Vehicle::orderBy('Dominio','desc')->get();
 
         return view('intervention.create', compact('vehiculos'));
     }
@@ -142,6 +141,8 @@ class InterventionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Intervention::where('id', $id)->delete();
+
+        return redirect()->route('intervencion.index')->with('success', 'Intervencioón eliminada exitosamente.');
     }
 }

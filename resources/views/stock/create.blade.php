@@ -20,8 +20,8 @@
 <div class="card card-primary">
     <div class="card-header">
         <div class="d-flex align-items-center">
-            <i class="fas fa-id-card fa-2x me-2"></i>
-            <button class="btn btn-primary">Datos del cliente</button>
+            <i class="fas fa-cubes fa-2x me-2"></i>
+            <button class="btn btn-primary">Datos del movimiento de stock</button>
           </div>
     </div>
     <div class="card-body">

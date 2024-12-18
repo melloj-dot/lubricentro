@@ -62,7 +62,7 @@ class CustomerController extends Controller
         // Crear el cliente y guardarlo en la base de datos
         $cliente = new Customer();
         $cliente->cuit_cuil = $validatedData['cuit_cuil'];
-        $cliente->name = $validatedData['nombre_cliente'];
+        $cliente->name = strtoupper($validatedData['nombre_cliente']);
         $cliente->adress = $validatedData['direccion'];
         $cliente->telephone = $validatedData['telefono'];
         $cliente->save();

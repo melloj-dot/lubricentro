@@ -32,12 +32,14 @@ class ProductController extends Controller
         return redirect()->route('producto.index')->with('success', 'Producto creado exitosamente.');
     }
 
-    public function edit(Product $product)
+    public function edit(string $id)
     {
+        $product = Product::where('id',$id)->first();
+
         return view('product.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(Request $request, string $id)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -46,14 +48,23 @@ class ProductController extends Controller
             'stock_quantity' => 'required|integer|min:0',
         ]);
 
-        $product->update($validated);
+
+        $product = Product::where('id', $id)->first();
+        $product->name = $validated['name'];
+        $product->description = $validated['description'];
+        $product->price = $validated['price'];
+        $product->stock_quantity = $validated['stock_quantity'];
+
+        $product->save();
 
         return redirect()->route('producto.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
-    public function destroy(Product $product)
+    public function destroy(string $id)
     {
-        $product->delete();
+
+        Product::where('id', $id)->delete();
+
         return redirect()->route('producto.index')->with('success', 'Producto eliminado.');
     }
 }

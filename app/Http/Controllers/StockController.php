@@ -11,7 +11,9 @@ class StockController extends Controller
     public function index()
     {
         $stocks = Stock::with('product')->get();
-        return view('stock.index', compact('stocks'));
+        $products = Product::all();
+
+        return view('stock.index', compact('stocks', 'products'));
     }
 
     public function create()
@@ -48,7 +50,20 @@ class StockController extends Controller
 
     public function destroy(string $id){
 
-        Stock::where('id', $id)->delete();
+        $stock = Stock::where('id', $id)->first();
+
+        $product_substraction = Product::where('id',$stock->product_id)->first();
+
+        if ($stock->quantity >$product_substraction->stock_quantity ) {
+            // la cantidad a eliminar es mayor a la que hay de ese producto
+            //mje error(?)
+        }else{
+            $substraction = ($product_substraction->stock_quantity) - ($stock->quantity);
+            $product_substraction->stock_quantity = $substraction;
+            $product_substraction->save();
+        }
+
+
 
         return to_route('stock.index');
     }

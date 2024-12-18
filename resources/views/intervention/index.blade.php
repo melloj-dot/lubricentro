@@ -24,9 +24,10 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <table id="interventions_table" class="table table-striped table-bordered" style="width:100%">
-            <thead>
+        <table id="interventions_table" class="table table-bordered table-hover" style="width:100%">
+            <thead class="table-dark">
                 <tr>
+                    <th>#</th>
                     <th>Fecha</th>
                     <th>Dominio</th>
                     <th>KM</th>
@@ -50,6 +51,7 @@
             <tbody>
                 @foreach ($interventions as $intervention)
                 <tr>
+                    <td>{{$intervention->id}}</td>
                     <td>{{$intervention->created_at->format('d-m-Y')}}</td>
                     <td>{{$intervention->dominio}}</td>
                     <td>{{$intervention->km}}</td>
@@ -121,7 +123,7 @@
                     <td>
                         <div class="d-flex align-items-center">
                         <form action="{{ route('intervencion.destroy',  $intervention->id) }}" method="POST">
-                            <a href=""><button class="btn btn-secondary me-2"><i class="fas fa-trash-alt"></button></i></a>
+                            <a href=""><button class="btn btn-danger me-2"><i class="fas fa-trash-alt"></button></i></a>
                             @csrf
                             @method('DELETE')
                         </form>
@@ -177,27 +179,7 @@
             buttons: [
                 'copy',
                 'excel',
-                'csv',
-                {
-                    extend: 'pdfHtml5',
-                    title: 'Reporte de Tabla', // Título del PDF
-                    text: 'Exportar a PDF', // Texto del botón
-                    orientation: 'landscape', // Orientación: portrait o landscape
-                    pageSize: 'A4', // Tamaño de la página: A4, Letter, etc.
-                    customize: function (doc) {
-                        doc.styles.title = {
-                            fontSize: 16,
-                            bold: true,
-                            alignment: 'center',
-                        };
-                        doc.styles.tableHeader = {
-                            bold: true,
-                            fontSize: 12,
-                            color: 'white',
-                            fillColor: '#f7d71c', // Color del encabezado
-                        };
-                    }
-                }
+                'csv'
             ]
 
 });

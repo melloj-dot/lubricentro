@@ -25,6 +25,30 @@
         </div>
     @endif
 
+    <h4>Cantidad de productos en stock</h4>
+    <table id="stock_quantity_table" class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre producto</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Cantidad en stock</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($products as $product)
+                <tr>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->description ?? 'Sin descripción' }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->stock_quantity }}</td>
+                    <td>{{ $product->created_at->format('d/m/Y H:i') }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <hr>
     <!-- Botón para registrar un nuevo movimiento de stock -->
     <a href="{{ route('stock.create') }}" class="btn btn-primary mb-3">Nuevo Movimiento de Stock</a>
 
@@ -134,12 +158,56 @@
                             bold: true,
                             fontSize: 12,
                             color: 'white',
-                            fillColor: '#f7d71c', // Color del encabezado
+                            fillColor: '#FF0000', // Color del encabezado
                         };
                     }
                 }
             ]
 
 });
+
+new DataTable('#stock_quantity_table', {
+        responsive: true,
+                "language":{
+                    "search": "Buscar",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "info":     "Mostrando página _PAGE_ de _PAGES_",
+                    "paginate":  {
+                            "previous": "Anterior",
+                            "next": "Siguiente",
+                    }
+
+                },
+                order: [[0, 'desc']],
+                dom: 'Bfrtip', // Habilita los botones
+            buttons: [
+                'copy',
+                'excel',
+                'csv',
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Reporte de Tabla', // Título del PDF
+                    text: 'Exportar a PDF', // Texto del botón
+                    orientation: 'portrait', // Orientación: portrait o landscape
+                    pageSize: 'A4', // Tamaño de la página: A4, Letter, etc.
+                    customize: function (doc) {
+                        doc.styles.title = {
+                            fontSize: 16,
+                            bold: true,
+                            alignment: 'center',
+                        };
+                        doc.styles.tableHeader = {
+                            bold: true,
+                            fontSize: 12,
+                            color: 'white',
+                            fillColor: '#FF0000', // Color del encabezado
+                        };
+                    }
+                }
+            ]
+
+});
+
+
 </script>
 @endsection

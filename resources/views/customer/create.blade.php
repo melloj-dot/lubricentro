@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="cuit_cuil">CUIT/CUIL</label>
-            <input type="text" class="form-control" id="cuit_cuil" name="cuit_cuil" placeholder="Ingrese el CUIT/CUIL del cliente (11 dígitos)" required>
+            <input type="number" class="form-control" id="cuit_cuil" name="cuit_cuil" placeholder="Ingrese el CUIT/CUIL del cliente (11 dígitos)" required>
         </div>
         <div class="form-group">
             <label for="direccion">Dirección</label>

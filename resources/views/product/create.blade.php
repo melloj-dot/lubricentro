@@ -27,7 +27,7 @@
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre del Producto</label>
-                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                <input style="text-transform:uppercase" type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descripción</label>
