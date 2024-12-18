@@ -36,11 +36,10 @@
         <div class="small-box bg-success">
           <div class="inner">
             <h3>{{$vehicle_count}}</h3>
-
             <p>Vehículos Registrados</p>
           </div>
           <div class="icon">
-            <i class="ion ion-stats-bars"></i>
+            <i class="fas fa-car"></i>
           </div>
           {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
         </div>
@@ -50,11 +49,10 @@
         <div class="small-box bg-secondary">
           <div class="inner">
             <h3>{{$intervention_count}}</h3>
-
             <p>Intervenciones Realizadas</p>
           </div>
           <div class="icon">
-            <i class="ion ion-stats-bars"></i>
+            <i class="fas fa-cog"></i>
           </div>
           {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
         </div>
@@ -67,7 +65,7 @@
             <p>Tipos de producto en stock</p>
           </div>
           <div class="icon">
-            <i class="fa-solid fa-rocket"></i>
+            <i class="ion ion-stats-bars"></i>
           </div>
           {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
         </div>
@@ -80,7 +78,7 @@
             <p>Dinero en productos en stock</p>
           </div>
           <div class="icon">
-            <i class="fas fa-cog"></i>
+            <i class="fa-solid fa-rocket"></i>
           </div>
           {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
         </div>
@@ -105,7 +103,6 @@
         <div class="small-box bg-gradient-primary">
           <div class="inner">
             <h3>${{$total_sale_money}}</h3>
-
             <p>Dinero total de ventas</p>
           </div>
           <div class="icon">
