@@ -304,7 +304,7 @@ return [
             'icon' => 'fas fa-fw fa-address-book',
             'submenu' => [
                 [
-                    'text' => 'Alta cliente',
+                    'text' => 'Alta de cliente',
                     'route' => 'cliente.create',
                     'icon' => 'fas fa-address-card'
                 ],
@@ -320,7 +320,7 @@ return [
             'icon' => 'fas fa-car-side',
             'submenu' => [
                 [
-                    'text' => 'Registrar vehículo',
+                    'text' => 'Alta de vehículo',
                     'route' => 'vehiculo.create',
                     'icon' => 'fas fa-plus'
                 ],
@@ -336,7 +336,7 @@ return [
             'icon' => 'fas fa-hammer',
             'submenu' => [
                 [
-                    'text' => 'Registrar intervención',
+                    'text' => 'Alta de intervención',
                     'route' => 'intervencion.create',
                     'icon' => 'fas fa-plus'
                 ],
@@ -352,7 +352,7 @@ return [
             'icon' => 'fas fa-laptop-medical',
             'submenu' => [
                 [
-                    'text' => 'Registrar producto',
+                    'text' => 'Alta de producto',
                     'route' => 'producto.create',
                     'icon' => 'fas fa-plus'
                 ],
